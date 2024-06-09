@@ -2,12 +2,26 @@ import { ButtonContainer, CardContainer, IconContainer, ResulContainer } from ".
 
 import IconStarImg from "../assets/icon-star.svg"
 import thankYouImg from "../assets/illustration-thank-you.svg"
+import { useState } from "react";
 
 export function Home() {
-  let aparecerResultado = true
+  const[MostrarResultado, setMostrarEesultado] = useState(false)
+  const[feedbackNote, setFeedbackNote] = useState(0)
+
+  function handleFeedbackButtonClick(event){
+    const feedback = Number(event.target.innerText)
+  
+      setFeedbackNote(feedback)
+  }
+
+    function handleSubmit(){
+      if (feedbackNote === 0) return
+
+      setMostrarEesultado(true)
+    }
 
   return (
-     aparecerResultado === false ? (
+     MostrarResultado === false ? (
       <CardContainer>
         <IconContainer>
           <img src={iconStar.svg} alt="Icone de estrela" />
@@ -17,21 +31,21 @@ export function Home() {
         <p> Conte-nos como foi o nossa ajuda com sua solicitação. Agradecemos muito seu fedback para podemos melhorar nosso atendimento!</p>
       
         <ButtonContainer>
-        <button>1</button>
-        <button>2</button>
-        <button>3</button>
-        <button>4</button>
-        <button>5</button>
+        <button onClick={handleFeedbackButtonClick}>1</button>
+        <buttonon Click={handleFeedbackButtonClick}>2</button>
+        <button onClick={handleFeedbackButtonClick}>3</button>
+        <button onClick={handleFeedbackButtonClick}>4</button>
+        <button onClick={handleFeedbackButtonClick}>5</button>
         </ButtonContainer>
       
-        <button>Enviar</button>
+        <button onClick={handlesubmit}>Enviar</button>
       </CardContainer>
     ): (
       <CardContainer>
         <img src={thankYouImg} alt="img de agradecimento"/>
         
         <ResulContainer>
-          <p> Você selecionou 4 de 5</p>
+          <p> Você selecionou {feedbackNote} de 5</p>
           
         </ResulContainer>
         
